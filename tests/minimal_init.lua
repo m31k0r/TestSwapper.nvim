@@ -14,5 +14,4 @@ ensure_plugin(plenary_dir, "nvim-lua/plenary.nvim")
 ensure_plugin(snacks_dir, "folke/snacks.nvim")
 
 vim.cmd("runtime plugin/plenary.vim")
-vim.cmd("runtime plugin/snacks.lua")
 require("plenary.busted")
