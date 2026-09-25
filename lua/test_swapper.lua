@@ -3,9 +3,7 @@ local module = require("test_swapper.module")
 
 ---@class Config
 ---@field opt string Your config option
-local config = {
-  opt = "Hello!",
-}
+local config = {}
 
 ---@class MyModule
 local M = {}
@@ -13,15 +11,8 @@ local M = {}
 ---@type Config
 M.config = config
 
----@param args Config?
--- you can define your setup function here. Usually configurations can be merged, accepting outside params and
--- you can also put some validation here for those.
-M.setup = function(args)
-  M.config = vim.tbl_deep_extend("force", M.config, args or {})
-end
-
-M.hello = function()
-  return module.my_first_function(M.config.opt)
+M.swap_test_or_cpp = function()
+  return module.swap_test_or_cpp()
 end
 
 return M
