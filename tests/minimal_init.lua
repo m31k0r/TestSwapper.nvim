@@ -1,10 +1,20 @@
 local function ensure_plugin(path, url)
+  local clone_output
+  local clone_exit_code
   if vim.fn.isdirectory(path) == 0 then
-    vim.fn.system({"git", "clone", "https://github.com/" .. url, path})
+    clone_output = vim.fn.system({"git", "clone", "https://github.com/" .. url, path})
+    clone_exit_code = vim.v.shell_error
   end
 
   if vim.fn.isdirectory(path) == 0 then
-    error("failed to prepare plugin dependency: " .. url)
+    error(
+      "failed to prepare plugin dependency: "
+        .. url
+        .. " (exit code "
+        .. (clone_exit_code or "unknown")
+        .. ")\n"
+        .. (clone_output or "")
+    )
   end
 
   vim.opt.rtp:append(path)
