@@ -4,7 +4,7 @@ local module = require("test_swapper.module")
 ---@class MyModule
 local M = {}
 
-_G.Snacks = M
+_G.test_swapper = M
 _G.svim = require("snacks.nvim")
 
 M.swap_test_or_cpp = function()
