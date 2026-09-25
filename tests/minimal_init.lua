@@ -3,6 +3,10 @@ local function ensure_plugin(path, url)
     vim.fn.system({"git", "clone", "https://github.com/" .. url, path})
   end
 
+  if vim.fn.isdirectory(path) == 0 then
+    error("failed to prepare plugin dependency: " .. url)
+  end
+
   vim.opt.rtp:append(path)
 end
 
