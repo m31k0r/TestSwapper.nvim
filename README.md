@@ -5,6 +5,11 @@
 
 A template repository for Neovim plugins.
 
+## Dependencies
+
+- [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
+- [snacks.nvim](https://github.com/folke/snacks.nvim)
+
 ## Using it
 
 Via `gh`:

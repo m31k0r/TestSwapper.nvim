@@ -1,11 +1,18 @@
-local plenary_dir = os.getenv("PLENARY_DIR") or "/tmp/plenary.nvim"
-local is_not_a_directory = vim.fn.isdirectory(plenary_dir) == 0
-if is_not_a_directory then
-  vim.fn.system({"git", "clone", "https://github.com/nvim-lua/plenary.nvim", plenary_dir})
+local function ensure_plugin(path, url)
+  if vim.fn.isdirectory(path) == 0 then
+    vim.fn.system({"git", "clone", "https://github.com/" .. url, path})
+  end
+
+  vim.opt.rtp:append(path)
 end
 
+local plenary_dir = os.getenv("PLENARY_DIR") or "/tmp/plenary.nvim"
+local snacks_dir = os.getenv("SNACKS_DIR") or "/tmp/snacks.nvim"
+
 vim.opt.rtp:append(".")
-vim.opt.rtp:append(plenary_dir)
+ensure_plugin(plenary_dir, "nvim-lua/plenary.nvim")
+ensure_plugin(snacks_dir, "folke/snacks.nvim")
 
 vim.cmd("runtime plugin/plenary.vim")
+vim.cmd("runtime plugin/snacks.lua")
 require("plenary.busted")
